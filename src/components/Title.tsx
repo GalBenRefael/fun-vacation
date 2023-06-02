@@ -1,8 +1,13 @@
-function Title() {
+interface Props {
+    mainText: string;
+    subText?: string;
+}
+
+function Title({ mainText, subText }: Props) {
     return (
-        <h2 className='text-center my-3 display-3'>
-            Our Offers <br />
-            <small className='text-muted'>our packages for this month</small>
+        <h2 className='text-center my-3'>
+            {mainText} <br />
+            {subText && <small className='text-muted'>{subText}</small>}
         </h2>
     );
 }
