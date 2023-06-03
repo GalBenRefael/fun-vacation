@@ -1,4 +1,5 @@
 import { User } from '../auth/SignUp';
+import { getToken } from '../auth/TokenManager';
 import { VacationPackage } from '../pages/Home';
 
 const serverUrl = 'http://localhost:3000/';
@@ -11,7 +12,12 @@ export async function getVacations(): Promise<Array<VacationPackage>> {
 }
 
 export async function getVacationById(_id: string): Promise<VacationPackage> {
-    const res = await fetch(`${vacationsUrl}${_id}`);
+    const res = await fetch(`${vacationsUrl}${_id}`, {
+        method: 'GET',
+        headers: {
+            'x-auth-token': getToken(),
+        },
+    });
     return res.json();
 }
 
@@ -22,6 +28,7 @@ export async function addVacations(
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'x-auth-token': getToken(),
         },
         body: JSON.stringify(vacation),
     });
@@ -31,6 +38,9 @@ export async function addVacations(
 export async function deleteVacation(_id: string): Promise<VacationPackage> {
     const res = await fetch(`${vacationsUrl}${_id}`, {
         method: 'DELETE',
+        headers: {
+            'x-auth-token': getToken(),
+        },
     });
     return res.json();
 }
@@ -43,6 +53,7 @@ export async function editVacation(
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
+            'x-auth-token': getToken(),
         },
         body: JSON.stringify(vaction),
     });
