@@ -8,6 +8,7 @@ import Vacations from './pages/vacations/Vacations';
 import Home from './pages/Home';
 import { ToastContainer } from 'react-toastify';
 import Edit from './pages/vacations/Edit';
+import SignUp from './auth/SignUp';
 
 function App() {
     return (
@@ -31,6 +32,10 @@ function App() {
                 <Route
                     path='edit/:id'
                     element={<Edit />}
+                />
+                <Route
+                    path='signup'
+                    element={<SignUp />}
                 />
             </Routes>
         </>

@@ -50,7 +50,7 @@ function Header() {
                 <ul className='navbar-nav flex-row'>
                     <li className='nav-item me-3'>
                         <NavLink
-                            to='/'
+                            to='/signup'
                             className='nav-link'
                         >
                             Sign Up
