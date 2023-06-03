@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import AddForm from '../components/AddForm';
-import Title from '../components/Title';
-import { VacationPackage } from './Home';
+import AddForm from '../../components/AddForm';
+import Title from '../../components/Title';
+import { VacationPackage } from '../Home';
 import { json } from 'stream/consumers';
 import {
     addVacations,
     deleteVacation,
     getVacations,
-} from '../services/ApiService';
-import NoDataMessage from '../components/NoDataMessage';
-import { formatDate, formatPrice } from '../services/Formatter';
+} from '../../services/ApiService';
+import NoDataMessage from '../../components/NoDataMessage';
+import { formatDate, formatPrice } from '../../services/Formatter';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 function Vacations() {
     const [vacations, setVacations] = useState<Array<VacationPackage>>([]);
@@ -77,9 +78,12 @@ function Vacations() {
                             <td>{vacation.location}</td>
                             <td>{formatPrice(vacation.price)}</td>
                             <td>
-                                <button className='btn tbn-default'>
+                                <Link
+                                    to={`/edit/${vacation._id}`}
+                                    className='btn btn-default'
+                                >
                                     <i className='bi bi-pen' />
-                                </button>
+                                </Link>
                                 <button
                                     className='btn tbn-default ms-2'
                                     onClick={() =>
