@@ -3,10 +3,12 @@ import FormLayout from '../components/FormLayout';
 import Title from '../components/Title';
 import { toast } from 'react-toastify';
 import { login } from '../services/ApiService';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     function validate(): boolean {
         if (!email) {
@@ -31,7 +33,7 @@ function Login() {
             email,
             password,
         }).then((user) => {
-            console.log(user);
+            navigate('/vacations');
         });
     }
     return (
