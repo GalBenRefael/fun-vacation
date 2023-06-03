@@ -48,6 +48,8 @@ function Vacations() {
         );
 
         setVacations(updated);
+
+        toast.success('Vacation has been deleted');
     }
 
     return (
