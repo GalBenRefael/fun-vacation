@@ -4,6 +4,8 @@ import Title from '../components/Title';
 import { VacationPackage } from './Home';
 import { json } from 'stream/consumers';
 import { addVacations, getVacations } from '../services/ApiService';
+import NoDataMessage from '../components/NoDataMessage';
+import { formatDate, formatPrice } from '../services/Formatter';
 
 function Vacations() {
     const [vacations, setVacations] = useState<Array<VacationPackage>>([]);
@@ -40,20 +42,23 @@ function Vacations() {
                 <tbody>
                     {vacations.map((vacation) => (
                         <tr key={vacation._id}>
-                            <td>{vacation.date}</td>
+                            <td>{formatDate(vacation.date)}</td>
                             <td>{vacation.location}</td>
-                            <td>{vacation.price}</td>
-                            <td></td>
-                            <button className='btn tbn-default'>
-                                <i className='bi bi-pen' />
-                            </button>
-                            <button className='btn tbn-default ms-2'>
-                                <i className='bi bi-trash' />
-                            </button>
+                            <td>{formatPrice(vacation.price)}</td>
+                            <td>
+                                <button className='btn tbn-default'>
+                                    <i className='bi bi-pen' />
+                                </button>
+                                <button className='btn tbn-default ms-2'>
+                                    <i className='bi bi-trash' />
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+
+            {vacations.length === 0 && <NoDataMessage />}
         </>
     );
 }

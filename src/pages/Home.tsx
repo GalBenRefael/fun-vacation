@@ -3,6 +3,7 @@ import Title from '../components/Title';
 import { log } from 'console';
 import { getVacations } from '../services/ApiService';
 import NoDataMessage from '../components/NoDataMessage';
+import { formatDate, formatPrice } from '../services/Formatter';
 
 export interface VacationPackage {
     _id?: string;
@@ -81,10 +82,6 @@ function Home() {
         setVacations(result);
     }
 
-    function formatDate(value: string) {
-        return new Date(value).toLocaleDateString();
-    }
-
     function isDataEmpty(): boolean {
         return origData.length === 0;
     }
@@ -95,55 +92,47 @@ function Home() {
                 mainText='Our Offers'
                 subText='our packages for this month'
             />
-            <div className='container'>
-                <div className='d-flex'>
-                    <div>
-                        <input
-                            type='text'
-                            placeholder='Search'
-                            className='form-control me-4'
-                            value={search}
-                            onChange={handleSearch}
-                            disabled={isDataEmpty()}
-                        />
-                    </div>
-                    <div>
-                        <select
-                            className='form-select'
-                            value={sort}
-                            onChange={handleSort}
-                            disabled={isDataEmpty()}
-                        >
-                            <option value={SortDirection.asc}>
-                                Location A-Z
-                            </option>
-                            <option value={SortDirection.desc}>
-                                Location Z-A
-                            </option>
-                        </select>
-                    </div>
-                </div>
 
-                <table className='table table-hover'>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Location</th>
-                            <th>Price</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {vacations.map((vacations) => (
-                            <tr key={vacations._id}>
-                                <td>{formatDate(vacations.date)}</td>
-                                <td>{vacations.location}</td>
-                                <td>{vacations.price}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                {isDataEmpty() && <NoDataMessage />}
+            <div className='d-flex px-4 w-50 my-5 bg-light'>
+                <input
+                    type='text'
+                    placeholder='Search'
+                    className='form-control me-4'
+                    value={search}
+                    onChange={handleSearch}
+                    disabled={isDataEmpty()}
+                />
+
+                <select
+                    className='form-select'
+                    value={sort}
+                    onChange={handleSort}
+                    disabled={isDataEmpty()}
+                >
+                    <option value={SortDirection.asc}>Location A-Z</option>
+                    <option value={SortDirection.desc}>Location Z-A</option>
+                </select>
             </div>
+
+            <table className='table table-hover'>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {vacations.map((vacations) => (
+                        <tr key={vacations._id}>
+                            <td>{formatDate(vacations.date)}</td>
+                            <td>{vacations.location}</td>
+                            <td>{formatPrice(vacations.price)}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            {isDataEmpty() && <NoDataMessage />}
         </>
     );
 }
