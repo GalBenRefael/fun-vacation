@@ -6,11 +6,13 @@ import { Route, Routes } from 'react-router-dom';
 import Order from './pages/Order';
 import Vacations from './pages/Vacations';
 import Home from './pages/Home';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
     return (
         <>
             <Header />
+            <ToastContainer />
 
             <Routes>
                 <Route

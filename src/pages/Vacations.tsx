@@ -10,6 +10,7 @@ import {
 } from '../services/ApiService';
 import NoDataMessage from '../components/NoDataMessage';
 import { formatDate, formatPrice } from '../services/Formatter';
+import { toast } from 'react-toastify';
 
 function Vacations() {
     const [vacations, setVacations] = useState<Array<VacationPackage>>([]);
@@ -23,6 +24,10 @@ function Vacations() {
     function onAdd(vacation: VacationPackage) {
         addVacations(vacation).then((json) => {
             setVacations([...vacations, json]);
+
+            toast.success(
+                `Vacation to ${json.location} has been added successfully`
+            );
         });
     }
 
