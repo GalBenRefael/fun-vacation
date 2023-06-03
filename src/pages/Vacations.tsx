@@ -3,7 +3,7 @@ import AddForm from '../components/AddForm';
 import Title from '../components/Title';
 import { VacationPackage } from './Home';
 import { json } from 'stream/consumers';
-import { getVacations } from '../services/ApiService';
+import { addVacations, getVacations } from '../services/ApiService';
 
 function Vacations() {
     const [vacations, setVacations] = useState<Array<VacationPackage>>([]);
@@ -13,6 +13,12 @@ function Vacations() {
             setVacations(json);
         });
     }, []);
+
+    function onAdd(vacation: VacationPackage) {
+        addVacations(vacation).then((json) => {
+            setVacations([...vacations, json]);
+        });
+    }
     return (
         <>
             <Title
@@ -20,7 +26,7 @@ function Vacations() {
                 subText='manage vacations packages'
             />
 
-            <AddForm />
+            <AddForm onAdd={onAdd} />
 
             <table className='table table-hover'>
                 <thead>
