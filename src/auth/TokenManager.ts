@@ -12,3 +12,7 @@ export function getToken(): string {
 export function rmeoveToken() {
     localStorage.removeItem(tokenKey);
 }
+
+export function verifyToken(): boolean {
+    return getToken().length > 0;
+}

@@ -1,4 +1,6 @@
 import { NavLink, Navigate } from 'react-router-dom';
+import Logout from '../auth/Logout';
+import { getToken, verifyToken } from '../auth/TokenManager';
 
 function Header() {
     return (
@@ -36,14 +38,16 @@ function Header() {
                                 Order Now
                             </NavLink>
                         </li>
-                        <li className='nav-item'>
-                            <NavLink
-                                to='/vacations'
-                                className='nav-link'
-                            >
-                                Vacations
-                            </NavLink>
-                        </li>
+                        {verifyToken() && (
+                            <li className='nav-item'>
+                                <NavLink
+                                    to='/vacations'
+                                    className='nav-link'
+                                >
+                                    Vacations
+                                </NavLink>
+                            </li>
+                        )}
                     </ul>
                 </div>
 
@@ -56,14 +60,21 @@ function Header() {
                             Sign Up
                         </NavLink>
                     </li>
-                    <li className='nav-item me-3'>
-                        <NavLink
-                            to='/login'
-                            className='nav-link'
-                        >
-                            Login
-                        </NavLink>
-                    </li>
+                    {!verifyToken() && (
+                        <li className='nav-item me-3'>
+                            <NavLink
+                                to='/login'
+                                className='nav-link'
+                            >
+                                Login
+                            </NavLink>
+                        </li>
+                    )}
+                    {verifyToken() && (
+                        <li className='nav-item me-3'>
+                            <Logout />
+                        </li>
+                    )}
                 </ul>
             </div>
         </nav>

@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import Edit from './pages/vacations/Edit';
 import SignUp from './auth/SignUp';
 import Login from './auth/Login';
+import RouteGuard from './auth/RouteGuard';
 
 function App() {
     return (
@@ -28,11 +29,19 @@ function App() {
                 />
                 <Route
                     path='vacations'
-                    element={<Vacations />}
+                    element={
+                        <RouteGuard>
+                            <Vacations />
+                        </RouteGuard>
+                    }
                 />
                 <Route
                     path='edit/:id'
-                    element={<Edit />}
+                    element={
+                        <RouteGuard>
+                            <Edit />
+                        </RouteGuard>
+                    }
                 />
                 <Route
                     path='signup'
