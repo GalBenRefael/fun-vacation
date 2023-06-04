@@ -35,6 +35,7 @@ function Login() {
             password,
         }).then((user) => {
             setToken(user.token);
+            localStorage.setItem('admin', JSON.stringify(user.isAdmin));
             navigate('/vacations');
         });
     }

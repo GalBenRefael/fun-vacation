@@ -6,6 +6,7 @@ function Logout() {
 
     function handleClick() {
         rmeoveToken();
+        localStorage.removeItem('admin');
         naviagte('/login');
     }
     return (

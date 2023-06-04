@@ -48,6 +48,14 @@ function Header() {
                                 </NavLink>
                             </li>
                         )}
+                        <li className='nav-item'>
+                            <NavLink
+                                to='/users'
+                                className='nav-link'
+                            >
+                                Users Manager
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
 
