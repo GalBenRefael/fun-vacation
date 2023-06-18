@@ -13,6 +13,7 @@ import Login from './auth/Login';
 import RouteGuard from './auth/RouteGuard';
 import UserManager from './pages/UserManager';
 import AdminGuard from './auth/AdminGuard';
+import Checkout from './pages/Checkout';
 
 function App() {
     return (
@@ -52,6 +53,10 @@ function App() {
                             <UserManager />
                         </AdminGuard>
                     }
+                />
+                <Route
+                    path='checkout'
+                    element={<Checkout />}
                 />
 
                 <Route
