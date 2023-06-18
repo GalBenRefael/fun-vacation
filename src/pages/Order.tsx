@@ -2,8 +2,16 @@ import { FormEvent, useEffect, useState } from 'react';
 import FormLayout from '../components/FormLayout';
 import Title from '../components/Title';
 import { VacationPackage } from './Home';
-import { getVacations } from '../services/ApiService';
+import { addOrder, getVacations } from '../services/ApiService';
 import { useNavigate } from 'react-router-dom';
+
+export interface Order {
+    _id?: string;
+    vacation: string;
+    name: string;
+    email?: string;
+    terms: boolean;
+}
 
 function Order() {
     const [vacations, setVacations] = useState<Array<VacationPackage>>([]);
@@ -37,10 +45,17 @@ function Order() {
         return true;
     }
 
-    function handleSubmit(e: FormEvent) {
+    async function handleSubmit(e: FormEvent) {
         e.preventDefault();
 
         if (!validate()) return;
+
+        await addOrder({
+            vacation,
+            name,
+            email,
+            terms,
+        });
 
         navigate('/checkout');
     }

@@ -1,6 +1,7 @@
 import { User } from '../auth/SignUp';
 import { getToken } from '../auth/TokenManager';
 import { VacationPackage } from '../pages/Home';
+import { Order } from '../pages/Order';
 
 const serverUrl = 'http://localhost:3000/';
 const vacationsUrl = `${serverUrl}vacations/`;
@@ -77,6 +78,17 @@ export async function login(user: User): Promise<User> {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
+    });
+    return res.json();
+}
+
+export async function addOrder(order: Order): Promise<Order> {
+    const res = await fetch(`${serverUrl}orders`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
     });
     return res.json();
 }
